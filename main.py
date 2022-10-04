@@ -26,7 +26,7 @@ logger.addHandler(handler)
 app = Flask(__name__)
 # сюда нужно вставить инфу со своего бота
 viber = Api(BotConfiguration(
-    name='PythonSampleBot',
+    name='ViberBot',
     avatar='http://site.com/avatar.jpg',
     auth_token='4fe7da620427e2ad-e463e2a4e06c3b42-e38192c60138840e'
 ))
@@ -58,7 +58,7 @@ def incoming():
 def set_webhook(viber):
     # print("--------------------------------SET WEBHOOK--------------------------------")
     # I used heroku as it is easier and serves over https
-    viber.set_webhook('HEROKU_APP_URL', [EventType.WEBHOOK, EventType.CONVERSATION_STARTED, EventType.DELIVERED, EventType.MESSAGE, EventType.SUBSCRIBED, EventType.UNSUBSCRIBED, EventType.FAILED, EventType.SEEN])
+    viber.set_webhook('https://viberbotfree.herokuapp.com/', [EventType.WEBHOOK, EventType.CONVERSATION_STARTED, EventType.DELIVERED, EventType.MESSAGE, EventType.SUBSCRIBED, EventType.UNSUBSCRIBED, EventType.FAILED, EventType.SEEN])
 if __name__ == "__main__":
     scheduler = sched.scheduler(time.time, time.sleep)
     scheduler.enter(13, 1, set_webhook, (viber,))
